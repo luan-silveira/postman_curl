@@ -107,7 +107,7 @@ require_once 'autoload.php';
                                         <div class="tab-pane active" id="tab-none"></div>
                                         <div class="tab-pane" id="tab-raw">
                                             <div class="form-group">
-                                                <select class="form-control" name="raw-type" id="raw-type" style="width: 100px;">
+                                                <select class="form-control editor-select" name="raw-type" id="raw-type" data-editor="raw-editor" style="width: 100px;">
                                                     <option value="TEXT">Texto</option>
                                                     <option>JSON</option>
                                                     <option>XML</option>
@@ -158,30 +158,36 @@ require_once 'autoload.php';
                     <div id="no-response">
                         <span>Clique em <b>Enviar</b> para exibir a resposta do servidor</span>
                     </div>
-                    <div id="overlay"  style="display: none;">
+                    <div id="overlay" style="display: none;">
                         <div class="overlay-group">
                             <img src="app/img/loader.gif">
                             <p>Enviando requisição...</p>
                         </div>
 
                     </div>
-                    <div id="response"  style="display: none;">
+                    <div id="response" style="display: none;">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a href="#response-raw" data-toggle="tab" class="nav-link active">Somente Texto (Raw)</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#preview" data-toggle="tab" class="nav-link">Preview</a>
+                                <a href="#response-preview" data-toggle="tab" class="nav-link">Preview</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="response-raw">
-                                <div class="code-editor">
-                                    <pre>dsfsdfsdf</pre>
+                                <div class="form-group">
+                                    <select class="form-control editor-select" style="margin-top: 10px; width: 80px" id="response-raw-type" data-editor="response-editor" style="width: 100px;">
+                                        <option value="TEXT">Texto</option>
+                                        <option>JSON</option>
+                                        <option>XML</option>
+                                        <option>HTML</option>
+                                    </select>
                                 </div>
+                                <div class="code-editor" id="response-editor"></div>
                             </div>
                             <div class="tab-pane" id="response-preview">
-                                <iframe id="frame-response" src="about:blank" frameborder="0" style="width: 100%; height: 400px;"></iframe>
+                                <iframe id="iframe-response" src="about:blank" frameborder="0" style="width: 100%; height: 400px;"></iframe>
                             </div>
                         </div>
                     </div>
@@ -192,14 +198,14 @@ require_once 'autoload.php';
     </div>
 </body>
 
-<link rel="stylesheet" href="app/plugins/codemirror/lib/codemirror.css">
-<script src="app/plugins/codemirror/lib/codemirror.js"></script>
-<script src="app/plugins/codemirror/mode/javascript/javascript.js"></script>
-<script src="app/plugins/codemirror/mode/xml/xml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
 <script>
-  
+    var rawEditor = ace.edit('raw-editor');
+    var responseEditor = ace.edit('response-editor', {
+        readOnly: true
+    });
 
-    $(function(){
+    $(function() {
         $('#url').focus();
     })
 </script>

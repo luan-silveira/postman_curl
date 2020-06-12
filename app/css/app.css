@@ -46,6 +46,8 @@
   padding: 10px;
   border: 1px solid #dfdfdf;
   margin-top: -1px;
+  height: 300px;
+  font-size: 13.3333333px;
 }
 
 #no-response, #overlay {

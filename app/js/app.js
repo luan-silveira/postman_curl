@@ -45,7 +45,14 @@ $(function () {
         $(target).addClass('active');
     });
 
-    
+    $('#raw-type').change(function(){
+      rawEditor.setOption('mode', 'ace/mode/' + $(this).val().toLowerCase());
+    })
+
+    $('#response-raw-type').change(function(){
+      responseEditor.setOption('mode', 'ace/mode/' + $(this).val().toLowerCase());
+    })
+
 
 });
 
