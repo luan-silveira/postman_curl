@@ -1,0 +1,66 @@
+* {
+  font-size: 10pt;
+}
+
+.header {
+  margin-top: 40px;
+  padding: 10px 30px;
+  background-color: #f8f8f8;
+  border-radius: 2px;
+  border: 1px solid #dfdfdf;
+}
+
+.title {
+  padding: 10px 0 20px;
+}
+
+.request-data {
+  padding: 5px 15px 20px;
+}
+
+.img-delete {
+  width: 15px;
+  content: url("../img/icoClose.png");
+}
+
+.td-value {
+  border-right: none !important;
+}
+
+.td-delete {
+  padding-left: 0 !important;
+  padding-right: 2px !important;
+  border-left: none !important;
+}
+
+.tr-active {
+  background-color: #fbfbfb;
+}
+
+.input-unchecked,
+.input-unchecked:focus {
+  color: #9e9e9e;
+}
+
+.code-editor {
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+  margin-top: -1px;
+}
+
+#no-response, #overlay {
+  text-align: center;
+}
+
+#no-response span {
+  font-style: italic;
+  line-height: 90px;
+  vertical-align: middle;
+}
+
+#overlay .overlay-group {
+  font-style: italic;
+  font-size: 11pt;
+  padding: 20px;
+}
+
