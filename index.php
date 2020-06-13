@@ -2,6 +2,24 @@
 
 require_once 'autoload.php';
 
+use App\CurlRequest;
+
+if (isset($_REQUEST['f']) && $_REQUEST['f']) {
+    header('Content-Type: application/json');
+    $data = (object) $_POST;
+    $type = CurlRequest::RAW;
+
+    if ($data->type == 2) {
+        $type = CurlRequest::URL_ENCODED;
+    }
+
+    // $request = new CurlRequest($data->url, $data->method)
+
+    echo json_encode($request, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +47,7 @@ require_once 'autoload.php';
             </div>
             <label>Requisição: </label>
             <div class="card">
-                <form>
+                <form method="post" id="formRequest">
                     <div class="form-group">
                         <div class="card-body row">
                             <div class="col-md-2">
@@ -129,13 +147,13 @@ require_once 'autoload.php';
                                                 <tbody>
                                                     <tr class="table-row">
                                                         <th scope="col" style="text-align: center; vertical-align: middle">
-                                                            <input class="check" type="checkbox" style="display: none;" name="header-check[]">
+                                                            <input class="check" type="checkbox" style="display: none;" name="body-check[]">
                                                         </th>
                                                         <td class="td-key">
-                                                            <input class="form-control form-control-sm input-key" type="text" name="header-key[]" placeholder="Chave">
+                                                            <input class="form-control form-control-sm input-key" type="text" name="body-key[]" placeholder="Chave">
                                                         </td>
                                                         <td class="td-value">
-                                                            <input class="form-control form-control-sm input-value" type="text" name="header-key[]" placeholder="Valor">
+                                                            <input class="form-control form-control-sm input-value" type="text" name="body-value[]" placeholder="Valor">
                                                         </td>
                                                         <td class="td-delete">
                                                             <a href="#" class="btn-delete" style="display: none;"><img class="img-delete"></a>

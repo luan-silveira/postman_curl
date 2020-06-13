@@ -30,7 +30,7 @@ $(function () {
     })
     .on("click", ".check", function () {
       $(this)
-        .closest('tr')
+        .closest("tr")
         .find("input:text")
         .toggleClass("input-unchecked", !$(this).is(":checked"));
     })
@@ -39,35 +39,56 @@ $(function () {
       return false;
     });
 
-    $('#request-body input:radio').click(function(){
-        var target = $(this).data('target');
-        $('#request-body .tab-pane').removeClass('active');
-        $(target).addClass('active');
+  $("#request-body input:radio").click(function () {
+    var target = $(this).data("target");
+    $("#request-body .tab-pane").removeClass("active");
+    $(target).addClass("active");
+  });
+
+  $("#raw-type").change(function () {
+    rawEditor.setOption("mode", "ace/mode/" + $(this).val().toLowerCase());
+  });
+
+  $("#response-raw-type").change(function () {
+    responseEditor.setOption("mode", "ace/mode/" + $(this).val().toLowerCase());
+  });
+
+  //---
+
+  $("#formRequest").submit(function (e) {
+	e.preventDefault();
+	var data = $(this).serialize();
+	var type = $('[name=type]:checked').val();
+	if (type == 1) {
+		data += '&body-text=' + rawEditor.getValue();
+	}
+
+	if (rawEditor)
+
+    $.post("index.php?f=1", data, function (e) {
+      console.log(e);
     });
-
-    $('#raw-type').change(function(){
-      rawEditor.setOption('mode', 'ace/mode/' + $(this).val().toLowerCase());
-    })
-
-    $('#response-raw-type').change(function(){
-      responseEditor.setOption('mode', 'ace/mode/' + $(this).val().toLowerCase());
-    })
-
-
+  });
 });
 
 function adicionarLinha(objTbody) {
-  var name = objTbody.parent().data('name') || 'table';
+  var name = objTbody.parent().data("name") || "table";
   var row =
     '<tr class="table-row">' +
     '    <th scope="col" style="text-align: center; vertical-align: middle">' +
-    '        <input class="check" type="checkbox" style="display: none;" name="' + name + '-check[]">' +
+    '        <input class="check" type="checkbox" style="display: none;" name="' +
+    name +
+    '-check[]">' +
     "    </th>" +
     '    <td class="td-key">' +
-    '        <input class="form-control form-control-sm input-key" type="text" name="' + name + '-key[]" placeholder="Chave">' +
+    '        <input class="form-control form-control-sm input-key" type="text" name="' +
+    name +
+    '-key[]" placeholder="Chave">' +
     "    </td>" +
     '    <td class="td-value">' +
-    '        <input class="form-control form-control-sm input-value" type="text" name="' + name + '-key[]" placeholder="Valor">' +
+    '        <input class="form-control form-control-sm input-value" type="text" name="' +
+    name +
+    '-value[]" placeholder="Valor">' +
     "    </td>" +
     '    <td class="td-delete">' +
     '        <a href="#" class="btn-delete" style="display: none;"><img class="img-delete"></a>' +
